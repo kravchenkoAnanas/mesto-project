@@ -1,0 +1,6 @@
+.popup__container {
+  background-color: white;
+  border-radius: 10px;
+  max-width: 430px;
+  min-height: 330px;
+}

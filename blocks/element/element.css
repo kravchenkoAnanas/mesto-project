@@ -1,0 +1,6 @@
+.element {
+  background-color: white;
+  color: black;
+  object-fit: cover;
+  border-radius: 10px;
+}
