@@ -3,4 +3,7 @@
   width: 32px;
   height: 32px;
   background-size: cover;
+  border: 0;
+  position: absolute;
+  
 }
