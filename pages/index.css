@@ -29,8 +29,4 @@
 @import url('../blocks/popup/__input-items/popup__input-items.css');
 @import url('../blocks/popup/__input-item/popup__input-item.css');
 @import url('../blocks/popup/__save-button/popup__save-button.css');
-
-
-* {
- /* border: 1px solid red;  */
-}
+@import url('../blocks/popup/_opened/popup_opened.css');

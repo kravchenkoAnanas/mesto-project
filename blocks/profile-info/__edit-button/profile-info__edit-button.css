@@ -1,12 +1,11 @@
 .profile-info__edit-button {
-  background: url('../../../images/Edit\ Button.svg');
+  background: url("../../../images/Edit\ Button.svg");
   background-color: black;
   border: 1px white solid;
   width: 24px;
   height: 24px;
   background-position: center;
   padding: 0;
-
 }
 
 .profile-info__edit-button:hover {
@@ -18,7 +17,5 @@
     width: 18px;
     height: 18px;
     justify-self: start;
-    /* margin-left: 10px;
-    margin-bottom: 26px; */
   }
 }
