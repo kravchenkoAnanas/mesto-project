@@ -10,7 +10,7 @@
   justify-items: end;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
   .profile {
     grid-template-columns: 282px;
     grid-template-rows: 120px min-content min-content;
