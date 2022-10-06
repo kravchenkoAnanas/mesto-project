@@ -1,13 +1,17 @@
-.profile-info__title {
+.profile__title {
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
+  max-width: 297px;
   width: 100%;
   margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 879px) {
-  .profile-info__title {
+  .profile__title {
     font-size: 27px;
     line-height: 33px;
     text-align: center;

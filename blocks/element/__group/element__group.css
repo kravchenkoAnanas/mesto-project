@@ -1,3 +1,11 @@
+.element__group {
+  background: url("../../../images/Group.svg");
+  border: 0;
+  width: 22px;
+  height: 19px;
+  padding: 0;
+}
+
 .element__group:hover {
   opacity: 0.6;
 }

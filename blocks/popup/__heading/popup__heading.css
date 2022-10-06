@@ -6,7 +6,6 @@
   padding: 34px 64px 54px 36px;
   border: 0;
   max-width: 330px;
-  min-height: 23px;
 }
 
 @media screen and (max-width: 879px) {
@@ -19,6 +18,5 @@
     font-size: 18px;
     line-height: 22px;
     max-width: 238px;
-    min-height: 22px;
   }
 }

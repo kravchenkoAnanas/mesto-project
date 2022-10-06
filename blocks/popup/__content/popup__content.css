@@ -1,15 +1,12 @@
-.popup__input-items {
+.popup__content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 0;
   max-width: 358px;
-  border: 0;
-  margin: 0;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 879px) {
-  .popup__input-items {
+  .popup__content {
     max-width: 238px;
   }
 }

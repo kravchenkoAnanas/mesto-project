@@ -4,13 +4,12 @@
 @import url('../blocks/header/header.css');
 @import url('../blocks/header/__logo/header__logo.css');
 @import url('../blocks/profile/profile.css');
-@import url('../blocks/profile-info/profile-info.css');
-@import url('../blocks/profile-info/__text/profile-info__text.css');
-@import url('../blocks/profile-info/__title/profile-info__title.css');
-@import url('../blocks/profile-info/__subtitle/profile-info__subtitle.css');
-@import url('../blocks/profile-info/__edit-button/profile-info__edit-button.css');
-@import url('../blocks/profile/__add-button/profile__add-button.css');
+@import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__title/profile__title.css');
+@import url('../blocks/profile/__subtitle/profile__subtitle.css');
+@import url('../blocks/profile/__edit-button/profile__edit-button.css');
+@import url('../blocks/profile/__add-button/profile__add-button.css');
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/element/element.css');
 @import url('../blocks/element/__mask-group/element__mask-group.css');
@@ -20,8 +19,6 @@
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__title/footer__title.css');
 @import url('../blocks/element/__group/_active/element__group_active.css');
-@import url('../blocks/profile-info/__button-image/profile-info__button-image.css');
-@import url('../blocks/profile/__button-image/profile__button-image.css');
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/popup/__close-button/popup__close-button.css');
@@ -29,4 +26,5 @@
 @import url('../blocks/popup/__input-items/popup__input-items.css');
 @import url('../blocks/popup/__input-item/popup__input-item.css');
 @import url('../blocks/popup/__save-button/popup__save-button.css');
+@import url('../blocks/popup/__content/popup__content.css');
 @import url('../blocks/popup/_opened/popup_opened.css');

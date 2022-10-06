@@ -4,9 +4,10 @@
   height: 32px;
   background-size: cover;
   border: 0;
-  position: fixed;
-  top: 19%;
-  left: 66%;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  cursor: pointer;
 }
 
 .popup__close-button:hover {
@@ -17,7 +18,7 @@
   .popup__close-button {
     width: 20px;
     height: 20px;
-    top: 5%;
-    left: 87%;
+    top: -36px;
+    right: 0;
   }
 }

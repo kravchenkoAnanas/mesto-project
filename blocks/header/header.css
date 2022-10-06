@@ -1,15 +1,14 @@
 .header {
   margin-top: 45px;
   margin-bottom: 40px;
-  min-height: 74px;
   width: 100%;
   border-bottom: 1px solid #545454;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 @media screen and (max-width: 879px) {
   .header {
-    margin-top: 45px;
+    margin-top: 28px;
     margin-bottom: 42px;
-    min-height: 56px;
   }
 }
