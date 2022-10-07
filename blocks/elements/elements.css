@@ -2,15 +2,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
   grid-template-rows: repeat(2, 361px);
-  margin-top: 51px;
   column-gap: 17px;
   row-gap: 20px;
+  justify-content: center;
+  margin-top: 51px;
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 320px) {
   .elements {
     max-width: 282px;
-    margin: 0 auto;
     margin-top: 36px;
   }
 }

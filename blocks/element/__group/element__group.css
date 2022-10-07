@@ -4,8 +4,9 @@
   width: 22px;
   height: 19px;
   padding: 0;
+  cursor: pointer;
 }
 
 .element__group:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }
