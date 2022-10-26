@@ -1,4 +1,4 @@
-.popup__input-items {
+.popup-edit__input-items {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 879px) {
-  .popup__input-items {
+  .popup-edit__input-items {
     max-width: 238px;
   }
 }

@@ -1,3 +1,7 @@
 .element__group_active {
-  background-color: black;
+  background: url("../../../../images/GroupActive.svg");
+  border: 0;
+  width: 22px;
+  height: 19px;
+  padding: 0;
 }
