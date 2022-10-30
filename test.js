@@ -1,16 +1,19 @@
-let content = document.querySelector(".content");
-let profileInfo = content.querySelector(".profile__info");
-let profileEditButton = profileInfo.querySelector(".profile__edit-button");
+const content = document.querySelector(".content");
+const profileInfo = content.querySelector(".profile__info");
+const profileEditButton = profileInfo.querySelector(".profile__edit-button");
 
-let popupEdit = document.querySelector(".popup-edit");
-let popupEditCloseButton = popupEdit.querySelector(".popup-edit__close-button");
+const popupEdit = document.querySelector(".popup-edit");
+const popupEditCloseButton = popupEdit.querySelector(".popup-edit__close-button");
 
-let profileAddButton = content.querySelector(".profile__add-button");
+const profileAddButton = content.querySelector(".profile__add-button");
 
-let popupAdd = document.querySelector(".popup-add");
-let popupAddCloseButton = popupAdd.querySelector(".popup-add__close-button");
+const popupAdd = document.querySelector(".popup-add");
+const popupAddCloseButton = popupAdd.querySelector(".popup-add__close-button");
+const popupAddForm = popupAdd.querySelector(".popup-add__content")
 
-let elements = content.querySelectorAll(".element .element__group");
+const elements = content.querySelector(".elements")
+const cardTemplate = document.querySelector("#element").content;
+
 
 function openPopupEdit() {
   console.log("open popup-edit")
@@ -33,27 +36,53 @@ function openPopupAdd() {
 }
 
 function closePopupAdd() {
+  popupAdd.classList.remove("popup-add_opened"); 
+}
+
+function submitPopupAdd(evt) {
+  evt.preventDefault();
+  console.log('Форма отправлена');
+
+  let name = evt.target.querySelector("#name").value;
+  let link = evt.target.querySelector("#link").value;
+
+  createAndAddCard(link, name);
   popupAdd.classList.remove("popup-add_opened");
 }
 
+function createCard(imgSrc, text) {
+  let card = cardTemplate.cloneNode(true);
+  let image = card.querySelector(".element__mask-group");
+  let title = card.querySelector(".element__title");
+  let like = card.querySelector(".element__group")
+  
+  image.setAttribute("src", imgSrc);
+  title.textContent = text;
+
+  like.addEventListener("click", function(evt) {
+    evt.target.classList.toggle("element__group_active");
+  });
+  return card
+}
+
+function addCard(card) {
+  elements.append(card);
+}
+
+function createAndAddCard(imgSrc, text) {
+  let newCard = createCard(imgSrc, text);
+  addCard(newCard);
+}
+
+// addEventListeners for profile
 // светофор -> полицейский наблюдает за событием - когда загорается зеленый свет -> когда это произойдет он останавливает движение
 profileEditButton.addEventListener("click", openPopupEdit); // к объекту profileEditButton прошу добавить слушатель события
 popupEditCloseButton.addEventListener("click", closePopupEdit);
 profileAddButton.addEventListener("click", openPopupAdd);
 popupAddCloseButton.addEventListener("click", closePopupAdd);
+popupAddForm.addEventListener("submit", submitPopupAdd);
 
-// console.log(elements)
-for (let i = 0; i < elements.length; i = i + 1) {
-  let element = elements[i] // получаем i - ое сердечко (element)
-
-  element.addEventListener("click", function () {
-    // содержит ли сердечко класс "element__group_active" ?
-    if (element.classList.contains("element__group_active")) {
-      // если да -> удаляем класс 
-      element.classList.remove("element__group_active");
-    } else {
-      // если нет -> добавляем класс
-      element.classList.add("element__group_active");
-    }
-  });
-}
+// create and add cards to the elemnts
+createAndAddCard("images/kirill-pershin-1088404-unsplash.png", "Карачаевск");
+createAndAddCard("images/MaskGroup.png", "Гора Эльбрус");
+createAndAddCard("images/MaskGroup2.png", "Домбай");

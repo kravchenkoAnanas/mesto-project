@@ -27,72 +27,15 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
-        <article class="element">
-          <img
-            src="images/kirill-pershin-1088404-unsplash.png"
-            alt="Здание"
-            class="element__mask-group"
-          />
-          <div class="element__text-group">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__group" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img
-            src="images/MaskGroup.png"
-            alt="Рассвет"
-            class="element__mask-group"
-          />
-          <div class="element__text-group">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__group" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img
-            src="images/MaskGroup2.png"
-            alt="Гора"
-            class="element__mask-group"
-          />
-          <div class="element__text-group">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__group" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img
-            src="images/MaskGroup.png"
-            alt="Рассвет"
-            class="element__mask-group"
-          />
-          <div class="element__text-group">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__group" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img
-            src="images/MaskGroup2.png"
-            alt="Гора"
-            class="element__mask-group"
-          />
-          <div class="element__text-group">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__group" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img
-            src="images/kirill-pershin-1088404-unsplash.png"
-            alt="Здание"
-            class="element__mask-group"
-          />
-          <div class="element__text-group">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="element__group" type="button"></button>
-          </div>
-        </article>
+        <template id="element">
+          <article class="element">
+            <img class="element__mask-group" alt="Не загружено"/>
+            <div class="element__text-group">
+              <h2 class="element__title"></h2>
+              <button class="element__group" type="button"></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
