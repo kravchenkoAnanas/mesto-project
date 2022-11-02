@@ -14,6 +14,9 @@ const popupAdd = document.querySelector(".popup-add");
 const popupAddCloseButton = popupAdd.querySelector(".popup-add__close-button");
 const popupAddForm = popupAdd.querySelector(".popup-add__content")
 
+const popupImg = document.querySelector(".popup-img");
+const popupImgCloseButton = popupImg.querySelector(".popup-img__close-button");
+
 const elements = content.querySelector(".elements")
 const cardTemplate = document.querySelector("#element").content;
 
@@ -82,14 +85,25 @@ function submitPopupAdd(evt) {
 
 function createCard(text, imgSrc) {
   let card = cardTemplate.cloneNode(true);
+
   let image = card.querySelector(".element__mask-group");
   let title = card.querySelector(".element__title");
   let like = card.querySelector(".element__group");
   let trash = card.querySelector(".element__trash");
   
-  
   image.setAttribute("src", imgSrc);
   title.textContent = text;
+
+  image.addEventListener("click", function() {
+    // popupImg - открывается
+    popupImg.classList.add("popup-img_opened");
+    // изменить картинку в popupImg на которую кликнули
+    let popupImgFull = popupImg.querySelector(".popup-img__full");
+    let popupImgHeading = popupImg.querySelector(".popup-img__heading");
+
+    popupImgFull.setAttribute("src", imgSrc);
+    popupImgHeading.textContent = text;
+  })
 
   like.addEventListener("click", function(evt) {
     evt.target.classList.toggle("element__group_active");
@@ -131,6 +145,10 @@ function editProfile(evt) {
   popupEdit.classList.remove("popup-edit_opened");
 }
 
+function closePopupImg() {
+  popupImg.classList.remove("popup-img_opened");
+}
+
 // addEventListeners for profile
 // светофор -> полицейский наблюдает за событием - когда загорается зеленый свет -> когда это произойдет он останавливает движение
 profileEditButton.addEventListener("click", openPopupEdit); // к объекту profileEditButton прошу добавить слушатель события
@@ -139,6 +157,7 @@ profileAddButton.addEventListener("click", openPopupAdd);
 popupAddCloseButton.addEventListener("click", closePopupAdd);
 popupAddForm.addEventListener("submit", submitPopupAdd);
 popupEditForm.addEventListener("submit", editProfile);
+popupImgCloseButton.addEventListener("click", closePopupImg);
 
 initialCards.forEach(function(initialCard) {
   createAndAddCard(initialCard.name, initialCard.link);
