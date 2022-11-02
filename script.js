@@ -4,6 +4,9 @@ const profileEditButton = profileInfo.querySelector(".profile__edit-button");
 
 const popupEdit = document.querySelector(".popup-edit");
 const popupEditCloseButton = popupEdit.querySelector(".popup-edit__close-button");
+const popupEditForm = popupEdit.querySelector(".popup-edit__content");
+const nameInput = popupEditForm.querySelector("#name");
+const jobInput = popupEditForm.querySelector("#info");
 
 const profileAddButton = content.querySelector(".profile__add-button");
 
@@ -15,8 +18,35 @@ const elements = content.querySelector(".elements")
 const cardTemplate = document.querySelector("#element").content;
 
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+  ];
+
 function openPopupEdit() {
-  console.log("open popup-edit")
+  // console.log("open popup-edit")
   // первый способ
   // popup.setAttribute("class", "popup popup_opened")
 
@@ -41,20 +71,22 @@ function closePopupAdd() {
 
 function submitPopupAdd(evt) {
   evt.preventDefault();
-  console.log('Форма отправлена');
-
-  let name = evt.target.querySelector("#name").value;
-  let link = evt.target.querySelector("#link").value;
-
-  createAndAddCard(link, name);
+  
+  let name = popupAddForm.querySelector("#name").value;
+  let link = popupAddForm.querySelector("#link").value;
+ 
+  createAndAddCard(name, link);
+  
   popupAdd.classList.remove("popup-add_opened");
 }
 
-function createCard(imgSrc, text) {
+function createCard(text, imgSrc) {
   let card = cardTemplate.cloneNode(true);
   let image = card.querySelector(".element__mask-group");
   let title = card.querySelector(".element__title");
-  let like = card.querySelector(".element__group")
+  let like = card.querySelector(".element__group");
+  let trash = card.querySelector(".element__trash");
+  
   
   image.setAttribute("src", imgSrc);
   title.textContent = text;
@@ -62,6 +94,13 @@ function createCard(imgSrc, text) {
   like.addEventListener("click", function(evt) {
     evt.target.classList.toggle("element__group_active");
   });
+  
+  trash.addEventListener("click", function(evt) {
+    let cardDescription = evt.target.parentElement;
+    let card = cardDescription.parentElement;
+
+    card.remove();
+  })
   return card
 }
 
@@ -69,9 +108,27 @@ function addCard(card) {
   elements.append(card);
 }
 
-function createAndAddCard(imgSrc, text) {
-  let newCard = createCard(imgSrc, text);
+function createAndAddCard(text, imgSrc) {
+  let newCard = createCard(text, imgSrc);
   addCard(newCard);
+}
+
+function editProfile(evt) {
+  evt.preventDefault();
+
+  let name = nameInput.value;
+  let job = jobInput.value;
+
+  console.log(name);
+  console.log(job);
+
+  let title = profileInfo.querySelector(".profile__title");
+  title.textContent = name;
+
+  let subtitle = profileInfo.querySelector(".profile__subtitle");
+  subtitle.textContent = job;
+  
+  popupEdit.classList.remove("popup-edit_opened");
 }
 
 // addEventListeners for profile
@@ -81,8 +138,9 @@ popupEditCloseButton.addEventListener("click", closePopupEdit);
 profileAddButton.addEventListener("click", openPopupAdd);
 popupAddCloseButton.addEventListener("click", closePopupAdd);
 popupAddForm.addEventListener("submit", submitPopupAdd);
+popupEditForm.addEventListener("submit", editProfile);
 
-// create and add cards to the elemnts
-createAndAddCard("images/kirill-pershin-1088404-unsplash.png", "Карачаевск");
-createAndAddCard("images/MaskGroup.png", "Гора Эльбрус");
-createAndAddCard("images/MaskGroup2.png", "Домбай");
+initialCards.forEach(function(initialCard) {
+  createAndAddCard(initialCard.name, initialCard.link);
+})
+            
