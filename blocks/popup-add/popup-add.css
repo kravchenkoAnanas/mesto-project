@@ -1,5 +1,5 @@
 .popup-add {
-  display: none;
+  display: flex;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -9,4 +9,10 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
 }

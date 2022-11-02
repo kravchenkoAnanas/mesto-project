@@ -150,7 +150,6 @@ function closePopupImg() {
 }
 
 // addEventListeners for profile
-// светофор -> полицейский наблюдает за событием - когда загорается зеленый свет -> когда это произойдет он останавливает движение
 profileEditButton.addEventListener("click", openPopupEdit); // к объекту profileEditButton прошу добавить слушатель события
 popupEditCloseButton.addEventListener("click", closePopupEdit);
 profileAddButton.addEventListener("click", openPopupAdd);
