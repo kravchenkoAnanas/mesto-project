@@ -1,21 +1,24 @@
 const content = document.querySelector(".content");
 const profileInfo = content.querySelector(".profile__info");
 const profileEditButton = profileInfo.querySelector(".profile__edit-button");
-
-const popupEdit = document.querySelector(".popup-edit");
-const popupEditCloseButton = popupEdit.querySelector(".popup-edit__close-button");
-const popupEditForm = popupEdit.querySelector(".popup-edit__content");
-const nameInput = popupEditForm.querySelector("#name");
-const jobInput = popupEditForm.querySelector("#info");
-
 const profileAddButton = content.querySelector(".profile__add-button");
 
+const popup = document.querySelector(".popup");
+const popupForm = popup.querySelector(".popup__container");
+const popupCloseButton = popup.querySelector(".popup__close");
+
+const popupEdit = document.querySelector(".popup-edit");
+const popupEditForm = popupEdit.querySelector(".popup-edit__content");
+const nameInput = popupForm.querySelector("#name").value;
+const jobInput = popupForm.querySelector("#info").value;
+const linkInput = popupForm.querySelector("#link").value;
+
+
+
 const popupAdd = document.querySelector(".popup-add");
-const popupAddCloseButton = popupAdd.querySelector(".popup-add__close-button");
 const popupAddForm = popupAdd.querySelector(".popup-add__content")
 
 const popupImg = document.querySelector(".popup-img");
-const popupImgCloseButton = popupImg.querySelector(".popup-img__close-button");
 
 const elements = content.querySelector(".elements")
 const cardTemplate = document.querySelector("#element").content;
@@ -48,39 +51,17 @@ const initialCards = [
   }
   ];
 
-function openPopupEdit() {
-  // console.log("open popup-edit")
-  // первый способ
-  // popup.setAttribute("class", "popup popup_opened")
-
-  // второй способ
-  // console.log(popup.className)
-  // console.log(popup.classList)
-  popupEdit.classList.add("popup-edit_opened");
+function openPopup() {
+  popup.classList.add("popup_opened");
 }
 
-function closePopupEdit() {
-  console.log("close popup-edit")
-  popupEdit.classList.remove("popup-edit_opened");
-}
-
-function openPopupAdd() {
-  popupAdd.classList.add("popup-add_opened");
-}
-
-function closePopupAdd() {
-  popupAdd.classList.remove("popup-add_opened"); 
+function closePopup() {
+  popup.classList.remove("popup_opened");
 }
 
 function submitPopupAdd(evt) {
   evt.preventDefault();
-  
-  let name = popupAddForm.querySelector("#name").value;
-  let link = popupAddForm.querySelector("#link").value;
- 
   createAndAddCard(name, link);
-  
-  popupAdd.classList.remove("popup-add_opened");
 }
 
 function createCard(text, imgSrc) {
@@ -96,7 +77,7 @@ function createCard(text, imgSrc) {
 
   image.addEventListener("click", function() {
     // popupImg - открывается
-    popupImg.classList.add("popup-img_opened");
+    
     // изменить картинку в popupImg на которую кликнули
     let popupImgFull = popupImg.querySelector(".popup-img__full");
     let popupImgHeading = popupImg.querySelector(".popup-img__heading");
@@ -119,7 +100,7 @@ function createCard(text, imgSrc) {
 }
 
 function addCard(card) {
-  elements.append(card);
+  elements.prepend(card);
 }
 
 function createAndAddCard(text, imgSrc) {
@@ -130,33 +111,20 @@ function createAndAddCard(text, imgSrc) {
 function editProfile(evt) {
   evt.preventDefault();
 
-  let name = nameInput.value;
-  let job = jobInput.value;
-
-  console.log(name);
-  console.log(job);
-
   let title = profileInfo.querySelector(".profile__title");
   title.textContent = name;
 
   let subtitle = profileInfo.querySelector(".profile__subtitle");
   subtitle.textContent = job;
-  
-  popupEdit.classList.remove("popup-edit_opened");
 }
 
-function closePopupImg() {
-  popupImg.classList.remove("popup-img_opened");
-}
 
 // addEventListeners for profile
-profileEditButton.addEventListener("click", openPopupEdit); // к объекту profileEditButton прошу добавить слушатель события
-popupEditCloseButton.addEventListener("click", closePopupEdit);
-profileAddButton.addEventListener("click", openPopupAdd);
-popupAddCloseButton.addEventListener("click", closePopupAdd);
+profileEditButton.addEventListener("click", openPopup); // к объекту profileEditButton прошу добавить слушатель события
+popupCloseButton.addEventListener("click", closePopup);
+profileAddButton.addEventListener("click", openPopup);
 popupAddForm.addEventListener("submit", submitPopupAdd);
 popupEditForm.addEventListener("submit", editProfile);
-popupImgCloseButton.addEventListener("click", closePopupImg);
 
 initialCards.forEach(function(initialCard) {
   createAndAddCard(initialCard.name, initialCard.link);
