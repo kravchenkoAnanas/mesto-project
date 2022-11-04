@@ -69,13 +69,13 @@ function submitPopupAdd(evt) {
 }
 
 function createCard(text, imgSrc) {
-  let card = cardTemplate.cloneNode(true);
+  const card = cardTemplate.cloneNode(true);
 
-  let image = card.querySelector(".element__mask-group");
-  let title = card.querySelector(".element__title");
-  let like = card.querySelector(".element__group");
-  let trash = card.querySelector(".element__trash");
-  
+  const image = card.querySelector(".element__mask-group");
+  const title = card.querySelector(".element__title");
+  const like = card.querySelector(".element__group");
+  const trash = card.querySelector(".element__trash");
+
   title.textContent = text;
   image.setAttribute("src", imgSrc);
   image.setAttribute("alt", text);
@@ -94,11 +94,10 @@ function createCard(text, imgSrc) {
   });
   
   trash.addEventListener("click", function(evt) {
-    let cardDescription = evt.target.parentElement;
-    let card = cardDescription.parentElement;
-
+    const card = evt.target.closest(".element");
     card.remove();
-  })
+  });
+  
   return card
 }
 
@@ -107,7 +106,7 @@ function addCard(card) {
 }
 
 function createAndAddCard(text, imgSrc) {
-  let newCard = createCard(text, imgSrc);
+  const newCard = createCard(text, imgSrc);
   addCard(newCard);
 }
 
