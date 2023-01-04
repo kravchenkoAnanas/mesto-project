@@ -8,13 +8,14 @@ const profileInfoSubTitle = profileInfo.querySelector(".profile__subtitle");
 
 const popupEdit = document.querySelector(".edit-popup");
 const popupEditForm = popupEdit.querySelector(".popup__content");
-const popupEditCloseButton = popupEdit.querySelector(".popup__close")
-const popupEditFormNameInput = popupEditForm.querySelector("#name")
-const popupEditFormInfoInput = popupEditForm.querySelector("#info")
+const popupEditCloseButton = popupEdit.querySelector(".popup__close");
+const popupEditFormFieldset = popupEdit.querySelector(".popup__input-items");
+const popupEditFormNameInput = popupEditForm.querySelector("#name-input");
+const popupEditFormInfoInput = popupEditForm.querySelector("#info-input");
 
 const popupAdd = document.querySelector(".add-popup");
 const popupAddForm = popupAdd.querySelector(".popup__content");
-const popupAddCloseButton = popupAdd.querySelector(".popup__close")
+const popupAddCloseButton = popupAdd.querySelector(".popup__close");
 const popupAddFormNameInput = popupAddForm.querySelector("#name");
 const popupAddFormLinkInput = popupAddForm.querySelector("#link");
 
@@ -118,6 +119,48 @@ function submitPopupEdit(evt) {
 
   closePopup(popupEdit);
 }
+
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formInput, inputError, messageError) => {
+  formInput.classList.add('popup__input-item_error');
+  inputError.textContent = messageError;
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formInput, inputError) => {
+  formInput.classList.remove('popup__input-item_error');
+  inputError.textContent = '';
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = (fieldset, formInput) => {
+  const inputError = fieldset.querySelector(`.${formInput.id}-error`);
+
+  //кастомное сообщение
+  if (formInput.validity.patternMismatch) {
+    formInput.setCustomValidity('Ошибка в символах');
+  } else {
+    formInput.setCustomValidity('');
+  };
+  
+  //сообщение компьютера
+  if (!formInput.validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(formInput, inputError, formInput.validationMessage);
+  } else {
+    // Если проходит, скроем
+    hideInputError(formInput, inputError);
+  }
+};
+
+// Вызовем функцию isValid на каждый ввод символа
+popupEditFormNameInput.addEventListener('input', function() {
+  isValid(popupEditFormFieldset, popupEditFormNameInput);
+}); 
+
+popupEditFormInfoInput.addEventListener('input', function() {
+  isValid(popupEditFormFieldset, popupEditFormInfoInput);
+}); 
 
 // addEventListeners for profile
 // к объекту profileEditButton прошу добавить слушатель события

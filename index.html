@@ -51,17 +51,27 @@
             <input
               type="text"
               class="popup__input-item"
-              id="name"
+              id="name-input"
               name="name"
               value="Жак-Ив Кусто"
+              minlength="2"
+              maxlength="40"
+              pattern="^[a-zA-Zа-яА-Я\-\s]+$"
+              required
             />
+            <span class="name-input-error popup__input-item-error"></span>
             <input
               type="text"
               class="popup__input-item"
-              id="info"
+              id="info-input"
               name="info"
               value="Исследователь океана"
+              minlength="2"
+              maxlength="200"
+              pattern="^[a-zA-Zа-яА-Я\-\s]+$"
+              required
             />
+            <span class="info-input-error popup__input-item-error"></span>
           </fieldset>
           <input type="submit" class="popup__submit-button" value="Сохранить" />
         </form>

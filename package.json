@@ -1,0 +1,26 @@
+{
+  "name": "mesto-project",
+  "version": "1.0.0",
+  "description": "mesto-project yandex practicum",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kravchenkoAnanas/mesto-project.git"
+  },
+  "keywords": [
+    "HTML",
+    "Css",
+    "JS",
+    "Webpack"
+  ],
+  "author": "Anastasia Kravchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kravchenkoAnanas/mesto-project/issues"
+  },
+  "homepage": "https://github.com/kravchenkoAnanas/mesto-project#readme"
+}
