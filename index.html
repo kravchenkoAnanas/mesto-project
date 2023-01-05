@@ -90,17 +90,25 @@
             <input
               type="text"
               class="popup__input-item"
-              id="name"
+              id="name-input"
               name="name"
               placeholder="Название"
+              minlength="2"
+              maxlength="30"
+              pattern="^[a-zA-Zа-яА-Я\-\s]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              required
             />
+            <span class="name-input-error popup__input-item-error"></span>
             <input
-              type="text"
+              type="url"
               class="popup__input-item"
-              id="link"
+              id="link-input"
               name="link"
               placeholder="Ссылка на картинку"
+              required
             />
+            <span class="link-input-error popup__input-item-error"></span>
             <input type="submit" class="popup__submit-button" value="Создать" />
           </fieldset>
         </form>

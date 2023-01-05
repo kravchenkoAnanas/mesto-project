@@ -253,3 +253,26 @@ initialCards.forEach(function(initialCard) {
 })
 
 enableValidation();
+
+document.addEventListener('keydown', function(event) {
+  if(event.key === "Escape") {
+    closePopup(popupEdit);
+    closePopup(popupAdd);
+    closePopup(popupImg);
+  }
+})
+
+window.addEventListener('click', (event) => {
+  const clickedObject = event.target.closest('.popup');
+  const popups = Array.from(document.querySelectorAll('.popup'));
+  const checkPopups = popups.some((popup) => {
+    popup === clickedObject;
+  });
+  console.log(clickedObject);
+  console.log(checkPopups);
+
+
+  // if (popup && !popup.classList.contains('popup_opened')) {
+  //   console.log(popup);
+  // }
+})
