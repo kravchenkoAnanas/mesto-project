@@ -54,9 +54,11 @@
               id="name-input"
               name="name"
               value="Жак-Ив Кусто"
+              placeholder="Имя"
               minlength="2"
               maxlength="40"
               pattern="^[a-zA-Zа-яА-Я\-\s]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
               required
             />
             <span class="name-input-error popup__input-item-error"></span>
@@ -66,9 +68,11 @@
               id="info-input"
               name="info"
               value="Исследователь океана"
+              placeholder="О себе"
               minlength="2"
               maxlength="200"
               pattern="^[a-zA-Zа-яА-Я\-\s]+$"
+              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
               required
             />
             <span class="info-input-error popup__input-item-error"></span>

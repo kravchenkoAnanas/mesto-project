@@ -13,6 +13,7 @@ const popupEditFormFieldset = popupEdit.querySelector(".popup__input-items");
 const popupEditFormNameInput = popupEditForm.querySelector("#name-input");
 const popupEditFormInfoInput = popupEditForm.querySelector("#info-input");
 
+
 const popupAdd = document.querySelector(".add-popup");
 const popupAddForm = popupAdd.querySelector(".popup__content");
 const popupAddCloseButton = popupAdd.querySelector(".popup__close");
@@ -120,6 +121,49 @@ function submitPopupEdit(evt) {
   closePopup(popupEdit);
 }
 
+const hasInvalidInput = (inputList) => {
+  // проходим по этому массиву методом some
+  return inputList.some((inputElement) => {
+        // Если поле не валидно, колбэк вернёт true
+    // Обход массива прекратится и вся функция
+    // hasInvalidInput вернёт true
+
+    return !inputElement.validity.valid;
+  })
+};
+
+// Функция принимает массив полей ввода
+// и элемент кнопки, состояние которой нужно менять
+
+const toggleButtonState = (inputList, buttonElement) => {
+  // Если есть хотя бы один невалидный инпут
+  if (hasInvalidInput(inputList)) {
+    // сделай кнопку неактивной
+    buttonElement.disabled = true;
+    buttonElement.classList.add('popup__submit-button_inactive');
+  } else {
+    // иначе сделай кнопку активной
+    buttonElement.disabled = false;
+    buttonElement.classList.remove('popup__submit-button_inactive');
+  }
+};
+
+const setEventListeners = (formElement) => {
+  // Найдём все поля формы и сделаем из них массив
+const inputList = Array.from(formElement.querySelectorAll(`.popup__input-item`));
+  // Найдём в текущей форме кнопку отправки
+const buttonElement = formElement.querySelector('.form__submit');
+const popupEditSubmitButton = popupEdit.querySelector(".popup__submit-button");
+inputList.forEach((inputElement) => {
+  inputElement.addEventListener('input', () => {
+    isValid(formElement, inputElement);
+
+          // Вызовем toggleButtonState и передадим ей массив полей и кнопку
+    toggleButtonState(inputList, buttonElement);
+  });
+});
+};
+
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formInput, inputError, messageError) => {
   formInput.classList.add('popup__input-item_error');
@@ -138,7 +182,7 @@ const isValid = (fieldset, formInput) => {
 
   //кастомное сообщение
   if (formInput.validity.patternMismatch) {
-    formInput.setCustomValidity('Ошибка в символах');
+    formInput.setCustomValidity(formInput.dataset.errorMessage);
   } else {
     formInput.setCustomValidity('');
   };
