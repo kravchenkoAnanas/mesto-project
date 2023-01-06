@@ -1,5 +1,5 @@
 import { createAndAddCard } from './card.js'
-import { popupAddFormLinkInput, popupAddFormNameInput, popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle } from '../index.js';
+import { popupAddFormLinkInput, popupAddFormNameInput, popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd } from '../index.js';
 
 export function openPopup(popup) {
   if (!popup.classList.contains("popup_opened")) {
@@ -24,7 +24,6 @@ export function submitPopupEdit(evt) {
 
 export function submitPopupAdd(evt) {
   evt.preventDefault();
-
   createAndAddCard(popupAddFormNameInput.value, popupAddFormLinkInput.value);
   closePopup(popupAdd);
 }

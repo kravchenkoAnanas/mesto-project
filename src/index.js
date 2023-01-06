@@ -13,17 +13,17 @@ const profileAddButton = content.querySelector(".profile__add-button");
 export const profileInfoTitle = profileInfo.querySelector(".profile__title");
 export const profileInfoSubTitle = profileInfo.querySelector(".profile__subtitle");
 
-const popupEdit = document.querySelector(".edit-popup");
+export const popupEdit = document.querySelector(".edit-popup");
 const popupEditForm = popupEdit.querySelector(".popup__content");
 const popupEditCloseButton = popupEdit.querySelector(".popup__close");
 export const popupEditFormNameInput = popupEditForm.querySelector("#name-input");
 export const popupEditFormInfoInput = popupEditForm.querySelector("#info-input");
 
-const popupAdd = document.querySelector(".add-popup");
+export const popupAdd = document.querySelector(".add-popup");
 const popupAddForm = popupAdd.querySelector(".popup__content");
 const popupAddCloseButton = popupAdd.querySelector(".popup__close");
-export const popupAddFormNameInput = popupAddForm.querySelector("#name");
-export const popupAddFormLinkInput = popupAddForm.querySelector("#link");
+export const popupAddFormNameInput = popupAddForm.querySelector("#name-input");
+export const popupAddFormLinkInput = popupAddForm.querySelector("#link-input");
 
 export const popupImg = document.querySelector(".img-popup");
 export const popupImgFull = popupImg.querySelector(".popup__full"); 
