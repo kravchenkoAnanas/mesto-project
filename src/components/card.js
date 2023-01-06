@@ -1,4 +1,4 @@
-import { cardTemplate, elements, popupImgDescription, popupImgFull } from "../index.js";
+import { cardTemplate, elements, popupImgDescription, popupImgFull, popupImg } from "../index.js";
 import { openPopup } from "./modal.js";
 
 export function createCard(text, imgSrc) {

@@ -1,5 +1,7 @@
+import './../pages/index.css';
+
 import { openPopup, closePopup, submitPopupEdit, submitPopupAdd } from "./components/modal.js"
-import { createCard, addCard, createAndAddCard } from "./components/card.js"
+import { createAndAddCard } from "./components/card.js"
 import { enableValidation } from "./components/validate.js"
 
 const content = document.querySelector(".content");
@@ -23,7 +25,7 @@ const popupAddCloseButton = popupAdd.querySelector(".popup__close");
 export const popupAddFormNameInput = popupAddForm.querySelector("#name");
 export const popupAddFormLinkInput = popupAddForm.querySelector("#link");
 
-const popupImg = document.querySelector(".img-popup");
+export const popupImg = document.querySelector(".img-popup");
 export const popupImgFull = popupImg.querySelector(".popup__full"); 
 export const popupImgDescription = popupImg.querySelector(".popup__description");
 const popupImgCloseButton = popupImg.querySelector(".popup__close");
@@ -84,15 +86,14 @@ initialCards.forEach(function(initialCard) {
   createAndAddCard(initialCard.name, initialCard.link);
 })
 
-enableValidation();
 enableValidation({
   formSelector: '.popup__content',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}); 
+  fieldsetSelector: '.popup__input-items',
+  inputSelector: '.popup__input-item',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_inactive',
+  errorClass: 'popup__input-item_error'
+});
 
 document.addEventListener('keydown', function(event) {
   if(event.key === "Escape") {
@@ -119,5 +120,4 @@ window.addEventListener('click', (event) => {
     });
   }
 })
-
 
