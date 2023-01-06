@@ -29,6 +29,7 @@ npm i webpack-cli --save-dev
 ```
 npm init
 npm set registry https://npm.prakticum-team.ru 
+
 npm login
 npm i webpack --save-dev
 ```
