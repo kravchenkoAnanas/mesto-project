@@ -1,4 +1,4 @@
-import './../pages/index.css';
+import './pages/index.css';
 
 import { openPopup, closePopup, submitPopupEdit, submitPopupAdd } from "./components/modal.js"
 import { createAndAddCard } from "./components/card.js"
