@@ -19,11 +19,10 @@ const popupEditCloseButton = popupEdit.querySelector(".popup__close");
 export const popupEditFormNameInput = popupEditForm.querySelector("#name-input");
 export const popupEditFormInfoInput = popupEditForm.querySelector("#info-input");
 
-export const popupAdd = document.querySelector(".add-popup");
+const popupAdd = document.querySelector(".add-popup");
 const popupAddForm = popupAdd.querySelector(".popup__content");
 const popupAddCloseButton = popupAdd.querySelector(".popup__close");
-export const popupAddFormNameInput = popupAddForm.querySelector("#name-input");
-export const popupAddFormLinkInput = popupAddForm.querySelector("#link-input");
+
 
 export const popupImg = document.querySelector(".img-popup");
 export const popupImgFull = popupImg.querySelector(".popup__full"); 
@@ -63,6 +62,8 @@ const initialCards = [
 // addEventListeners for profile
 // к объекту profileEditButton прошу добавить слушатель события
 profileEditButton.addEventListener("click", function() {
+  popupEditFormNameInput.value = profileInfoTitle.textContent;
+  popupEditFormInfoInput.value = profileInfoSubTitle.textContent;
   openPopup(popupEdit);
 });
 popupEditCloseButton.addEventListener("click", function() {
@@ -95,15 +96,7 @@ enableValidation({
   errorClass: 'popup__input-item_error'
 });
 
-document.addEventListener('keydown', function(event) {
-  if(event.key === "Escape") {
-    listPopups.forEach((popup) => {
-      closePopup(popup);
-    });
-  }
-})
-
-window.addEventListener('click', (event) => {
+window.addEventListener('mousedown', (event) => {
   // находим объект, на который кликнули
   const clickedObject = event.target;
   // проверяем, что найденный объект - это один из объектов,
