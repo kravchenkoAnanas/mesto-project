@@ -19,9 +19,11 @@ const popupEditCloseButton = popupEdit.querySelector(".popup__close");
 export const popupEditFormNameInput = popupEditForm.querySelector("#name-input");
 export const popupEditFormInfoInput = popupEditForm.querySelector("#info-input");
 
-const popupAdd = document.querySelector(".add-popup");
+export const popupAdd = document.querySelector(".add-popup");
 const popupAddForm = popupAdd.querySelector(".popup__content");
 const popupAddCloseButton = popupAdd.querySelector(".popup__close");
+export const popupAddFormNameInput = popupAdd.querySelector("#name-input");
+export const popupAddFormLinkInput = popupAdd.querySelector("#link-input");
 
 
 export const popupImg = document.querySelector(".img-popup");

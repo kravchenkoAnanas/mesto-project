@@ -1,6 +1,5 @@
 import { createAndAddCard } from './card.js'
-import { popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle, popupEdit } from '../index.js';
-
+import { popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd, popupAddFormLinkInput, popupAddFormNameInput } from '../index.js';
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -33,13 +32,8 @@ export function submitPopupEdit(evt) {
 }
 
 export function submitPopupAdd(evt) {
-  const form = evt.target;
-  const nameInput = form.querySelector("#name-input");
-  const linkInput = form.querySelector("#link-input");
-  const popupAdd = form.closest('.add-popup');
-  
   evt.preventDefault();
-  createAndAddCard(nameInput.value, linkInput.value);
+  createAndAddCard(popupAddFormNameInput.value, popupAddFormLinkInput.value);
   closePopup(popupAdd);
-  form.reset();
+  evt.target.reset();
 }
