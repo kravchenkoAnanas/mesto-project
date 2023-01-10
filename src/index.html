@@ -17,11 +17,11 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img src="<%=require('./images/Avatar.png')%>" alt="Аватар" class="profile__avatar" />
+        <img src="" alt="Аватар" class="profile__avatar" />
         <div class="profile__info">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <h1 class="profile__title"></h1>
           <button class="profile__edit-button" type="button"></button>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle"></p>
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
@@ -31,7 +31,10 @@
             <img class="element__mask-group"/>
             <div class="element__text-group">
               <h2 class="element__title"></h2>
-              <button class="element__group" type="button"></button>
+              <div class="element__group">
+                <button class="element__like" type="button"></button>
+                <span class="element__count"></span>
+              </div>
               <button class="element__trash" type="button"></button>
             </div>
           </article>
@@ -52,7 +55,7 @@
               class="popup__input-item"
               id="name-input"
               name="name"
-              value="Жак-Ив Кусто"
+              value=""
               placeholder="Имя"
               minlength="2"
               maxlength="40"
@@ -66,7 +69,7 @@
               class="popup__input-item"
               id="info-input"
               name="info"
-              value="Исследователь океана"
+              value=""
               placeholder="О себе"
               minlength="2"
               maxlength="200"

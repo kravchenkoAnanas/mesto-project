@@ -1,15 +1,17 @@
 import { cardTemplate, elements, popupImgDescription, popupImgFull, popupImg } from "../index.js";
 import { openPopup } from "./modal.js";
 
-export function createCard(text, imgSrc) {
+export function createCard(text, imgSrc, cntLikes) {
   const card = cardTemplate.cloneNode(true);
 
   const image = card.querySelector(".element__mask-group");
   const title = card.querySelector(".element__title");
-  const like = card.querySelector(".element__group");
+  const like = card.querySelector(".element__like");
+  const counter = card.querySelector(".element__count");
   const trash = card.querySelector(".element__trash");
 
   title.textContent = text;
+  counter.textContent = cntLikes;
   image.setAttribute("src", imgSrc);
   image.setAttribute("alt", text);
 
@@ -23,7 +25,7 @@ export function createCard(text, imgSrc) {
   })
 
   like.addEventListener("click", function(evt) {
-    evt.target.classList.toggle("element__group_active");
+    evt.target.classList.toggle("element__like_active");
   });
   
   trash.addEventListener("click", function(evt) {
@@ -38,8 +40,8 @@ export function addCard(card) {
   elements.prepend(card);
 }
 
-export function createAndAddCard(text, imgSrc) {
-  const newCard = createCard(text, imgSrc);
+export function createAndAddCard(text, imgSrc, cntLikes) {
+  const newCard = createCard(text, imgSrc, cntLikes);
   addCard(newCard);
 }
 

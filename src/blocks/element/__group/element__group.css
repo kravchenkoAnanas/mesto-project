@@ -1,12 +1,7 @@
 .element__group {
-  background: url("../../../images/Group.svg");
-  border: 0;
-  width: 22px;
-  height: 19px;
-  padding: 0;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.element__group:hover {
-  opacity: 0.5;
-}
+
