@@ -16,18 +16,19 @@ export const profileInfoSubTitle = profileInfo.querySelector(".profile__subtitle
 const profileInfoAvatar = content.querySelector(".profile__avatar");
 export const profileInfoAvatarImg = content.querySelector(".profile__avatar-img");
 
-
 export const popupEdit = document.querySelector(".edit-popup");
 const popupEditForm = popupEdit.querySelector(".popup__content");
 const popupEditCloseButton = popupEdit.querySelector(".popup__close");
 export const popupEditFormNameInput = popupEditForm.querySelector("#name-input");
 export const popupEditFormInfoInput = popupEditForm.querySelector("#info-input");
+export const popupEditSubmitButton = popupEditForm.querySelector(".popup__submit-button")
 
 export const popupAdd = document.querySelector(".add-popup");
 const popupAddForm = popupAdd.querySelector(".popup__content");
 const popupAddCloseButton = popupAdd.querySelector(".popup__close");
 export const popupAddFormNameInput = popupAdd.querySelector("#name-input");
 export const popupAddFormLinkInput = popupAdd.querySelector("#link-input");
+export const popupAddSubmitButton = popupAdd.querySelector(".popup__submit-button")
 
 export const popupImg = document.querySelector(".img-popup");
 export const popupImgFull = popupImg.querySelector(".popup__full"); 
@@ -38,6 +39,7 @@ export const popupAvatar = document.querySelector(".avatar-popup");
 const popupAvatarForm = popupAvatar.querySelector(".popup__content");
 const popupAvatarCloseButton = popupAvatar.querySelector(".popup__close");
 export const popupAvatarFormLinkInput = popupAvatar.querySelector("#link-input");
+export const popupAvatarSubmitButton = popupAvatar.querySelector(".popup__submit-button")
 
 export const elements = content.querySelector(".elements")
 export const cardTemplate = document.querySelector("#element").content;
@@ -117,15 +119,15 @@ getUserInfo()
 getInitialCards()
 .then(cards => {
   cards.reverse().forEach(function(card) {
-    console.log(card.likes);
     const cardId = card._id;
     const name = card.name;
     const link = card.link;
     const cntLikes = card.likes.length;
     const ownerId = card.owner._id;
+    const isLiked = card.likes.some(user => {
+      return user._id === userId
+    });
     
-    createAndAddCard(cardId, name, link, cntLikes, ownerId);
+    createAndAddCard(cardId, name, link, cntLikes, ownerId, isLiked);
   })
 });
-
-

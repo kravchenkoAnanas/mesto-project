@@ -1,6 +1,20 @@
 import { createAndAddCard } from './card.js';
-import { popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd, popupAddFormLinkInput, popupAddFormNameInput, popupAvatarFormLinkInput, profileInfoAvatarImg, popupAvatar } from '../index.js';
+import { popupEditFormInfoInput, popupEditFormNameInput,
+  profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd,
+  popupAddFormLinkInput, popupAddFormNameInput, popupAvatarFormLinkInput,
+  profileInfoAvatarImg, popupAvatar, popupEditSubmitButton,
+  popupAddSubmitButton, popupAvatarSubmitButton
+} from '../index.js';
 import { updateUserInfo, postCard, updateAvatar } from './api.js';
+
+
+function renderLoading(isLoading, button) {
+  if (isLoading) {
+    button.setAttribute("value", button.value + "...");
+  } else {
+    button.setAttribute("value", button.value.replace("...", ""));
+  };
+}
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -32,8 +46,13 @@ export function submitPopupEdit(evt) {
   profileInfoTitle.textContent = name;
   profileInfoSubTitle.textContent = about;
 
+  renderLoading(true, popupEditSubmitButton);
+  updateUserInfo(name, about)
+  .finally(() => {
+    renderLoading(false, popupEditSubmitButton);
+  })
+
   closePopup(popupEdit);
-  updateUserInfo(name, about);
 }
 
 export function submitPopupAdd(evt) {
@@ -41,6 +60,7 @@ export function submitPopupAdd(evt) {
   const name = popupAddFormNameInput.value;
   const link = popupAddFormLinkInput.value;
 
+  renderLoading(true, popupAddSubmitButton);
   postCard(name, link)
   .then(card => {
     const cardId = card._id;
@@ -51,6 +71,10 @@ export function submitPopupAdd(evt) {
     
     createAndAddCard(cardId, name, link, cntLikes, ownerId);
   })
+  .finally(() => {
+    renderLoading(false, popupAddSubmitButton);
+  });
+
   closePopup(popupAdd);
   evt.target.reset();
 }
@@ -60,6 +84,12 @@ export function submitPopupAvatar(evt) {
   const link = popupAvatarFormLinkInput.value;
 
   profileInfoAvatarImg.setAttribute("src", link);
+  
+  renderLoading(true, popupAvatarSubmitButton);
+  updateAvatar(link)
+  .finally(() => {
+    renderLoading(false, popupAvatarSubmitButton);
+  });
+
   closePopup(popupAvatar);
-  updateAvatar(link);
 }

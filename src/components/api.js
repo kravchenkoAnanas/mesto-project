@@ -16,7 +16,7 @@ export const getUserInfo = () => {
     }
     return Promise.reject(`Ошибка: ${res.status}`);
   })
-}
+};
 
 export const updateUserInfo = (name, about) => {
   return fetch(`${config.baseUrl}/users/me`, {
@@ -25,9 +25,14 @@ export const updateUserInfo = (name, about) => {
     body: JSON.stringify({
       name: name,
       about: about
+    })})
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
     })
-  });
-}
+};
 
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
@@ -72,12 +77,19 @@ export const deleteCard = (cardId) => {
 };
 
 export const updateAvatar = (link) => {
+  // setTimeout(function() { console.log("setTimeout") }, 10000);
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({
       avatar: link
     })
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
 

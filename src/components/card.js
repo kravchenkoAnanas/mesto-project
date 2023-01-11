@@ -3,7 +3,7 @@ import { userId, cardTemplate, elements,
 import { openPopup } from "./modal.js";
 import { deleteCard, putLike, deleteLike } from "./api.js";
 
-export function createCard(cardId, text, imgSrc, cntLikes, ownerId) {
+export function createCard(cardId, text, imgSrc, cntLikes, ownerId, isLiked) {
   const card = cardTemplate.cloneNode(true);
 
   const image = card.querySelector(".element__mask-group");
@@ -29,12 +29,18 @@ export function createCard(cardId, text, imgSrc, cntLikes, ownerId) {
   })
 
   // like
+  if (isLiked) {
+    like.classList.add("element__like_active");
+  }
   like.addEventListener("click", function(evt) {
     if (evt.target.classList.contains("element__like_active")) {
       evt.target.classList.remove("element__like_active");
+      // Int - integer - целое
+      counter.textContent = parseInt(counter.textContent) - 1;
       deleteLike(cardId);
     } else {
       evt.target.classList.add("element__like_active");
+      counter.textContent = parseInt(counter.textContent) + 1;
       putLike(cardId);
     }
   });
@@ -52,12 +58,8 @@ export function createCard(cardId, text, imgSrc, cntLikes, ownerId) {
     });
   } else {
     // в противном случае убираем с поста символ корзины
-    // TODO - сделать класс `element__trashnone`
-    // trash.classList.add("element__trash-none")
     trash.remove();
-    // trash.style.cssText += "display: None;";
   }
-console.log(card);
   return card
 }
 
@@ -65,8 +67,7 @@ export function addCard(card) {
   elements.prepend(card);
 }
 
-export function createAndAddCard(cardId, text, imgSrc, cntLikes, ownerId) {
-  const newCard = createCard(cardId, text, imgSrc, cntLikes, ownerId);
-console.log(newCard);
+export function createAndAddCard(cardId, text, imgSrc, cntLikes, ownerId, isLiked) {
+  const newCard = createCard(cardId, text, imgSrc, cntLikes, ownerId, isLiked);
   addCard(newCard);
 }
