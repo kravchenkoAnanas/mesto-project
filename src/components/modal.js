@@ -1,5 +1,6 @@
-import { createAndAddCard } from './card.js'
+import { createAndAddCard } from './card.js';
 import { popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd, popupAddFormLinkInput, popupAddFormNameInput } from '../index.js';
+import { updateUserInfo, postCard } from './api.js';
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -24,16 +25,24 @@ export function closePopup(popup) {
 
 export function submitPopupEdit(evt) {
   evt.preventDefault();
+  
+  const name = popupEditFormNameInput.value;
+  const about = popupEditFormInfoInput.value;
 
-  profileInfoTitle.textContent = popupEditFormNameInput.value;
-  profileInfoSubTitle.textContent = popupEditFormInfoInput.value;
+  profileInfoTitle.textContent = name;
+  profileInfoSubTitle.textContent = about;
 
   closePopup(popupEdit);
+  updateUserInfo(name, about);
 }
 
 export function submitPopupAdd(evt) {
   evt.preventDefault();
-  createAndAddCard(popupAddFormNameInput.value, popupAddFormLinkInput.value);
+  const name = popupAddFormNameInput.value;
+  const link = popupAddFormLinkInput.value;
+
+  createAndAddCard(name, link);
+  postCard(name, link);
   closePopup(popupAdd);
   evt.target.reset();
 }

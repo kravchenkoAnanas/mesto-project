@@ -1,5 +1,25 @@
 .profile__avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  position: relative;
+}
+
+.profile__avatar .profile__avatar-icon {
+  width: 26px;
+  height: 26px;
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+}
+
+.profile__avatar:hover{
+  cursor: pointer;
+}
+
+.profile__avatar:hover :not(.profile__avatar-icon) {
+  opacity: 0.2;
+}
+
+.profile__avatar:hover .profile__avatar-icon {
+  display: inline;
+  opacity: 1;
 }

@@ -13,7 +13,7 @@ const profileEditButton = profileInfo.querySelector(".profile__edit-button");
 const profileAddButton = content.querySelector(".profile__add-button");
 export const profileInfoTitle = profileInfo.querySelector(".profile__title");
 export const profileInfoSubTitle = profileInfo.querySelector(".profile__subtitle");
-const profileInfoAvatar = content.querySelector(".profile__avatar");
+const profileInfoAvatar = content.querySelector(".profile__avatar-img");
 
 export const popupEdit = document.querySelector(".edit-popup");
 const popupEditForm = popupEdit.querySelector(".popup__content");
@@ -35,36 +35,6 @@ const popupImgCloseButton = popupImg.querySelector(".popup__close");
 
 export const elements = content.querySelector(".elements")
 export const cardTemplate = document.querySelector("#element").content;
-
-// const initialCards = getInitialCards();
-// console.log('initialcards');
-// console.log(initialCards);
-// [
-//   {
-//     name: 'Архыз',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//   },
-//   {
-//     // name: 'Челябинская область',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//   },
-//   {
-//     name: 'Иваново',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//   },
-//   {
-//     name: 'Камчатка',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-//   },
-//   {
-//     name: 'Холмогорский район',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-//   },
-//   {
-//     name: 'Байкал',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//   }
-// ];
 
 // addEventListeners for profile
 // к объекту profileEditButton прошу добавить слушатель события
@@ -120,6 +90,8 @@ window.addEventListener('mousedown', (event) => {
 // work w server
 getUserInfo()
 .then(userInfo => {
+  console.log(userInfo);
+  console.log(userInfo._id);
   profileInfoTitle.textContent = userInfo.name;
   profileInfoSubTitle.textContent = userInfo.about;
   profileInfoAvatar.setAttribute("src", userInfo.avatar);
@@ -129,6 +101,7 @@ getUserInfo()
 getInitialCards()
 .then(initialCards => {
   initialCards.forEach(function(initialCard) {
+    console.log(initialCard);
     createAndAddCard(initialCard.name, initialCard.link, initialCard.likes.length);
   })
 });
