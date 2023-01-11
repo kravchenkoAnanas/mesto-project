@@ -126,5 +126,21 @@
         <h3 class="popup__description"></h3>
       </div>
     </div>
+    <div class="popup avatar-popup">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h3 class="popup__heading">Обновить аватар</h3>
+        <form class="popup__content" name="avatar-form">
+          <input
+              type="url"
+              class="popup__input-item"
+              id="link-input"
+              name="link"
+              placeholder="Ссылка на картинку"
+              required
+            />
+          <span class="link-input-error popup__input-item-error"></span>
+        <input type="submit" class="popup__submit-button" value="Сохранить" />
+    </div>
   </body>
 </html>

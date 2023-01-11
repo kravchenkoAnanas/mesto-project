@@ -1,6 +1,6 @@
 import './pages/index.css';
 
-import { openPopup, closePopup, submitPopupEdit, submitPopupAdd } from "./components/modal.js"
+import { openPopup, closePopup, submitPopupEdit, submitPopupAdd, submitPopupAvatar } from "./components/modal.js"
 import { createAndAddCard } from "./components/card.js"
 import { enableValidation } from "./components/validate.js"
 import { getInitialCards, getUserInfo } from './components/api.js'
@@ -13,7 +13,9 @@ const profileEditButton = profileInfo.querySelector(".profile__edit-button");
 const profileAddButton = content.querySelector(".profile__add-button");
 export const profileInfoTitle = profileInfo.querySelector(".profile__title");
 export const profileInfoSubTitle = profileInfo.querySelector(".profile__subtitle");
-const profileInfoAvatar = content.querySelector(".profile__avatar-img");
+const profileInfoAvatar = content.querySelector(".profile__avatar");
+export const profileInfoAvatarImg = content.querySelector(".profile__avatar-img");
+
 
 export const popupEdit = document.querySelector(".edit-popup");
 const popupEditForm = popupEdit.querySelector(".popup__content");
@@ -31,6 +33,11 @@ export const popupImg = document.querySelector(".img-popup");
 export const popupImgFull = popupImg.querySelector(".popup__full"); 
 export const popupImgDescription = popupImg.querySelector(".popup__description");
 const popupImgCloseButton = popupImg.querySelector(".popup__close");
+
+export const popupAvatar = document.querySelector(".avatar-popup");
+const popupAvatarForm = popupAvatar.querySelector(".popup__content");
+const popupAvatarCloseButton = popupAvatar.querySelector(".popup__close");
+export const popupAvatarFormLinkInput = popupAvatar.querySelector("#link-input");
 
 export const elements = content.querySelector(".elements")
 export const cardTemplate = document.querySelector("#element").content;
@@ -60,6 +67,14 @@ popupAddForm.addEventListener("submit", submitPopupAdd)
 popupImgCloseButton.addEventListener("click", function() {
   closePopup(popupImg);
 });
+
+profileInfoAvatar.addEventListener("click", function() {
+  openPopup(popupAvatar);  
+});
+popupAvatarCloseButton.addEventListener("click", function() {
+  closePopup(popupAvatar);
+});
+popupAvatarForm.addEventListener("submit", submitPopupAvatar)
 
 enableValidation({
   formSelector: '.popup__content',
@@ -95,13 +110,14 @@ getUserInfo()
 
   profileInfoTitle.textContent = userInfo.name;
   profileInfoSubTitle.textContent = userInfo.about;
-  profileInfoAvatar.setAttribute("src", userInfo.avatar);
-  profileInfoAvatar.setAttribute("alt", "Аватар");
+  profileInfoAvatarImg.setAttribute("src", userInfo.avatar);
+  profileInfoAvatarImg.setAttribute("alt", "Аватар");
 });
 
 getInitialCards()
 .then(cards => {
   cards.reverse().forEach(function(card) {
+    console.log(card.likes);
     const cardId = card._id;
     const name = card.name;
     const link = card.link;

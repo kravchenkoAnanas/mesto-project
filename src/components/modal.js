@@ -1,6 +1,6 @@
 import { createAndAddCard } from './card.js';
-import { popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd, popupAddFormLinkInput, popupAddFormNameInput } from '../index.js';
-import { updateUserInfo, postCard } from './api.js';
+import { popupEditFormInfoInput, popupEditFormNameInput, profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd, popupAddFormLinkInput, popupAddFormNameInput, popupAvatarFormLinkInput, profileInfoAvatarImg, popupAvatar } from '../index.js';
+import { updateUserInfo, postCard, updateAvatar } from './api.js';
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -53,4 +53,13 @@ export function submitPopupAdd(evt) {
   })
   closePopup(popupAdd);
   evt.target.reset();
+}
+
+export function submitPopupAvatar(evt) {
+  evt.preventDefault();
+  const link = popupAvatarFormLinkInput.value;
+
+  profileInfoAvatarImg.setAttribute("src", link);
+  closePopup(popupAvatar);
+  updateAvatar(link);
 }

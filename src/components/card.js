@@ -1,7 +1,7 @@
 import { userId, cardTemplate, elements,
   popupImgDescription, popupImgFull, popupImg } from "../index.js";
 import { openPopup } from "./modal.js";
-import { deleteCard } from "./api.js";
+import { deleteCard, putLike, deleteLike } from "./api.js";
 
 export function createCard(cardId, text, imgSrc, cntLikes, ownerId) {
   const card = cardTemplate.cloneNode(true);
@@ -30,7 +30,13 @@ export function createCard(cardId, text, imgSrc, cntLikes, ownerId) {
 
   // like
   like.addEventListener("click", function(evt) {
-    evt.target.classList.toggle("element__like_active");
+    if (evt.target.classList.contains("element__like_active")) {
+      evt.target.classList.remove("element__like_active");
+      deleteLike(cardId);
+    } else {
+      evt.target.classList.add("element__like_active");
+      putLike(cardId);
+    }
   });
   
   // trash
