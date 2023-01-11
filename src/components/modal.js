@@ -41,8 +41,16 @@ export function submitPopupAdd(evt) {
   const name = popupAddFormNameInput.value;
   const link = popupAddFormLinkInput.value;
 
-  createAndAddCard(name, link);
-  postCard(name, link);
+  postCard(name, link)
+  .then(card => {
+    const cardId = card._id;
+    const name = card.name;
+    const link = card.link;
+    const cntLikes = card.likes.length;
+    const ownerId = card.owner._id;
+    
+    createAndAddCard(cardId, name, link, cntLikes, ownerId);
+  })
   closePopup(popupAdd);
   evt.target.reset();
 }

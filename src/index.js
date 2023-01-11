@@ -27,7 +27,6 @@ const popupAddCloseButton = popupAdd.querySelector(".popup__close");
 export const popupAddFormNameInput = popupAdd.querySelector("#name-input");
 export const popupAddFormLinkInput = popupAdd.querySelector("#link-input");
 
-
 export const popupImg = document.querySelector(".img-popup");
 export const popupImgFull = popupImg.querySelector(".popup__full"); 
 export const popupImgDescription = popupImg.querySelector(".popup__description");
@@ -35,6 +34,8 @@ const popupImgCloseButton = popupImg.querySelector(".popup__close");
 
 export const elements = content.querySelector(".elements")
 export const cardTemplate = document.querySelector("#element").content;
+
+export let userId;
 
 // addEventListeners for profile
 // к объекту profileEditButton прошу добавить слушатель события
@@ -90,8 +91,8 @@ window.addEventListener('mousedown', (event) => {
 // work w server
 getUserInfo()
 .then(userInfo => {
-  console.log(userInfo);
-  console.log(userInfo._id);
+  userId = userInfo._id;
+
   profileInfoTitle.textContent = userInfo.name;
   profileInfoSubTitle.textContent = userInfo.about;
   profileInfoAvatar.setAttribute("src", userInfo.avatar);
@@ -99,10 +100,16 @@ getUserInfo()
 });
 
 getInitialCards()
-.then(initialCards => {
-  initialCards.forEach(function(initialCard) {
-    console.log(initialCard);
-    createAndAddCard(initialCard.name, initialCard.link, initialCard.likes.length);
+.then(cards => {
+  cards.reverse().forEach(function(card) {
+    const cardId = card._id;
+    const name = card.name;
+    const link = card.link;
+    const cntLikes = card.likes.length;
+    const ownerId = card.owner._id;
+    
+    createAndAddCard(cardId, name, link, cntLikes, ownerId);
   })
 });
+
 
