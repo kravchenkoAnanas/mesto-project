@@ -60,6 +60,8 @@ export function submitPopupEdit(evt) {
   .then(user => {
     profileInfoTitle.textContent = name;
     profileInfoSubTitle.textContent = about;
+
+    closePopup(popupEdit);
   })
   .catch(err => {
     console.log(err);
@@ -67,8 +69,6 @@ export function submitPopupEdit(evt) {
   .finally(() => {
     renderLoading(false, popupEditSubmitButton);
   })
-
-  closePopup(popupEdit);
 }
 
 export function submitPopupAdd(evt) {
@@ -106,6 +106,7 @@ export function submitPopupAvatar(evt) {
   updateAvatar(link)
   .then(avatar => {
     profileInfoAvatarImg.setAttribute("src", link);
+    closePopup(popupAvatar);
   })
   .catch(err => {
     console.log(err);
@@ -113,6 +114,4 @@ export function submitPopupAvatar(evt) {
   .finally(() => {
     renderLoading(false, popupAvatarSubmitButton);
   });
-
-  closePopup(popupAvatar);
 }

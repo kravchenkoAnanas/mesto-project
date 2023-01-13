@@ -75,6 +75,11 @@ const setEventListeners = (formElement, selectors) => {
   // Найдём в текущей форме кнопку отправки
   const buttonElement = formElement.querySelector(selectors.submitButtonSelector);
   toggleButtonState(inputList, buttonElement, selectors);
+  formElement.addEventListener('reset', () => {
+    setTimeout(() => {
+     toggleButtonState(inputList, buttonElement, selectors);
+    }, 0); 
+  });
 
   inputList.forEach((formInput) => {
     formInput.addEventListener('input', () => {
