@@ -16,7 +16,7 @@ export function createCard(cardId, text, imgSrc, cntLikes, ownerId, isLiked) {
   title.textContent = text;
   counter.textContent = cntLikes;
   image.setAttribute("src", imgSrc);
-  // image.setAttribute("alt", text);
+  image.setAttribute("alt", text);
 
   // click on image
   image.addEventListener("click", function() {
@@ -33,15 +33,24 @@ export function createCard(cardId, text, imgSrc, cntLikes, ownerId, isLiked) {
     like.classList.add("element__like_active");
   }
   like.addEventListener("click", function(evt) {
-    if (evt.target.classList.contains("element__like_active")) {
-      evt.target.classList.remove("element__like_active");
-      // Int - integer - целое
-      counter.textContent = parseInt(counter.textContent) - 1;
-      deleteLike(cardId);
+    if (evt.target.classList.contains("element__like_active")) { 
+      deleteLike(cardId)
+      .then(card => {
+        counter.textContent = card.likes.length;
+        evt.target.classList.remove("element__like_active");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     } else {
-      evt.target.classList.add("element__like_active");
-      counter.textContent = parseInt(counter.textContent) + 1;
-      putLike(cardId);
+      putLike(cardId)
+      .then(card => {
+        counter.textContent = card.likes.length;
+        evt.target.classList.add("element__like_active");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   });
   
@@ -51,10 +60,14 @@ export function createCard(cardId, text, imgSrc, cntLikes, ownerId, isLiked) {
     // с id пользователя (чей профиль), то доавляем возможность
     // удаления данного поста
     trash.addEventListener("click", function(evt) {
-      evt.target.closest(".element").remove();
-      
       // удаление карты с сервера
-      deleteCard(cardId);
+      deleteCard(cardId)
+      .then(card => {
+        evt.target.closest(".element").remove();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     });
   } else {
     // в противном случае убираем с поста символ корзины

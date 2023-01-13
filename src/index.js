@@ -6,7 +6,7 @@ import { enableValidation } from "./components/validate.js"
 import { getInitialCards, getUserInfo } from './components/api.js'
 
 const content = document.querySelector(".content");
-const listPopups = Array.from(document.querySelectorAll(".popup"));
+export const listPopups = Array.from(document.querySelectorAll(".popup"));
 
 const profileInfo = content.querySelector(".profile__info");
 const profileEditButton = profileInfo.querySelector(".profile__edit-button");
@@ -87,47 +87,30 @@ enableValidation({
   errorClass: 'popup__input-item_error'
 });
 
-window.addEventListener('mousedown', (event) => {
-  // находим объект, на который кликнули
-  const clickedObject = event.target;
-  // проверяем, что найденный объект - это один из объектов,
-  // у которых класс popup
-  const checkPopups = listPopups.some((popup) => {
-    return popup === clickedObject;
+// work w server
+Promise.all([getUserInfo(), getInitialCards()])
+// тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+  .then(([userInfo, cards]) => {
+    userId = userInfo._id;
+    
+    profileInfoTitle.textContent = userInfo.name;
+    profileInfoSubTitle.textContent = userInfo.about;
+    profileInfoAvatarImg.setAttribute("src", userInfo.avatar);
+    profileInfoAvatarImg.setAttribute("alt", "Аватар");
+
+    cards.reverse().forEach(function(card) {
+      const cardId = card._id;
+      const name = card.name;
+      const link = card.link;
+      const cntLikes = card.likes.length;
+      const ownerId = card.owner._id;
+      const isLiked = card.likes.some(user => {
+        return user._id === userId
+      })
+      createAndAddCard(cardId, name, link, cntLikes, ownerId, isLiked);
+    }); 
+  })
+  .catch(err => {
+    console.log(err);
   });
 
-  // если объект, на который кликнули - popup (НЕ popup_container, popup_*)
-  // то закрываем все popup ы
-  if (checkPopups) {
-    listPopups.forEach((popup) => {
-      closePopup(popup);
-    });
-  }
-})
-
-// work w server
-getUserInfo()
-.then(userInfo => {
-  userId = userInfo._id;
-
-  profileInfoTitle.textContent = userInfo.name;
-  profileInfoSubTitle.textContent = userInfo.about;
-  profileInfoAvatarImg.setAttribute("src", userInfo.avatar);
-  profileInfoAvatarImg.setAttribute("alt", "Аватар");
-});
-
-getInitialCards()
-.then(cards => {
-  cards.reverse().forEach(function(card) {
-    const cardId = card._id;
-    const name = card.name;
-    const link = card.link;
-    const cntLikes = card.likes.length;
-    const ownerId = card.owner._id;
-    const isLiked = card.likes.some(user => {
-      return user._id === userId
-    });
-    
-    createAndAddCard(cardId, name, link, cntLikes, ownerId, isLiked);
-  })
-});

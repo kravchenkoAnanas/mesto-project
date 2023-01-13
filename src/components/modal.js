@@ -3,18 +3,10 @@ import { popupEditFormInfoInput, popupEditFormNameInput,
   profileInfoTitle, profileInfoSubTitle, popupEdit, popupAdd,
   popupAddFormLinkInput, popupAddFormNameInput, popupAvatarFormLinkInput,
   profileInfoAvatarImg, popupAvatar, popupEditSubmitButton,
-  popupAddSubmitButton, popupAvatarSubmitButton
+  popupAddSubmitButton, popupAvatarSubmitButton, listPopups
 } from '../index.js';
 import { updateUserInfo, postCard, updateAvatar } from './api.js';
-
-
-function renderLoading(isLoading, button) {
-  if (isLoading) {
-    button.setAttribute("value", button.value + "...");
-  } else {
-    button.setAttribute("value", button.value.replace("...", ""));
-  };
-}
+import { renderLoading } from './utils.js';
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -23,10 +15,29 @@ function closeByEscape(evt) {
   }
 }
 
+function closeByClick(evt) {
+  // находим объект, на который кликнули
+  const clickedObject = evt.target;
+  // проверяем, что найденный объект - это один из объектов,
+  // у которых класс popup
+  const checkPopups = listPopups.some((popup) => {
+    return popup === clickedObject;
+  });
+
+  // если объект, на который кликнули - popup (НЕ popup_container, popup_*)
+  // то закрываем все popup ы
+  if (checkPopups) {
+    listPopups.forEach((popup) => {
+      closePopup(popup);
+    });
+  }
+}
+
 export function openPopup(popup) {
   if (!popup.classList.contains("popup_opened")) {
     popup.classList.add("popup_opened");
     document.addEventListener('keydown', closeByEscape);
+    window.addEventListener('mousedown', closeByClick);
   }
 }
 
@@ -34,6 +45,7 @@ export function closePopup(popup) {
   if (popup.classList.contains("popup_opened")) {
     popup.classList.remove("popup_opened");
     document.removeEventListener('keydown', closeByEscape);
+    window.removeEventListener('mousedown', closeByClick);
   }
 }
 
@@ -43,11 +55,15 @@ export function submitPopupEdit(evt) {
   const name = popupEditFormNameInput.value;
   const about = popupEditFormInfoInput.value;
 
-  profileInfoTitle.textContent = name;
-  profileInfoSubTitle.textContent = about;
-
   renderLoading(true, popupEditSubmitButton);
   updateUserInfo(name, about)
+  .then(user => {
+    profileInfoTitle.textContent = name;
+    profileInfoSubTitle.textContent = about;
+  })
+  .catch(err => {
+    console.log(err);
+  })
   .finally(() => {
     renderLoading(false, popupEditSubmitButton);
   })
@@ -70,23 +86,30 @@ export function submitPopupAdd(evt) {
     const ownerId = card.owner._id;
     
     createAndAddCard(cardId, name, link, cntLikes, ownerId);
+    closePopup(popupAdd);
+    evt.target.reset();
+  })
+  .catch(err => {
+    console.log(err);
   })
   .finally(() => {
     renderLoading(false, popupAddSubmitButton);
   });
 
-  closePopup(popupAdd);
-  evt.target.reset();
 }
 
 export function submitPopupAvatar(evt) {
   evt.preventDefault();
   const link = popupAvatarFormLinkInput.value;
 
-  profileInfoAvatarImg.setAttribute("src", link);
-  
   renderLoading(true, popupAvatarSubmitButton);
   updateAvatar(link)
+  .then(avatar => {
+    profileInfoAvatarImg.setAttribute("src", link);
+  })
+  .catch(err => {
+    console.log(err);
+  })
   .finally(() => {
     renderLoading(false, popupAvatarSubmitButton);
   });

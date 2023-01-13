@@ -1,3 +1,5 @@
+import { checkResponse } from "./utils.js";
+
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-18',
   headers: {
@@ -10,12 +12,7 @@ export const getUserInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(checkResponse)
 };
 
 export const updateUserInfo = (name, about) => {
@@ -26,24 +23,14 @@ export const updateUserInfo = (name, about) => {
       name: name,
       about: about
     })})
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(checkResponse)
 };
 
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+  .then(checkResponse)
 }
 
 export const postCard = (name, link) => {
@@ -55,12 +42,7 @@ export const postCard = (name, link) => {
       link: link
     })
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+  .then(checkResponse)
 }
 
 export const deleteCard = (cardId) => {
@@ -68,12 +50,7 @@ export const deleteCard = (cardId) => {
     method: 'DELETE',
     headers: config.headers,
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+  .then(checkResponse)
 };
 
 export const updateAvatar = (link) => {
@@ -85,12 +62,7 @@ export const updateAvatar = (link) => {
       avatar: link
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  .then(checkResponse)
 }
 
 export const putLike = (cardId) => {
@@ -98,12 +70,7 @@ export const putLike = (cardId) => {
     method: 'PUT',
     headers: config.headers
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+  .then(checkResponse)
 }
 
 export const deleteLike = (cardId) => {
@@ -111,10 +78,5 @@ export const deleteLike = (cardId) => {
     method: 'DELETE',
     headers: config.headers
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+  .then(checkResponse)
 }

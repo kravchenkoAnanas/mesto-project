@@ -15,9 +15,8 @@ const hideInputError = (formInput, inputError, selectors) => {
 // Функция, которая проверяет валидность input
 // Если input валиден, то вызывается функция hideInputError
 // в противном случае вызывается функция showInputError
-const isValid = (fieldset, formInput, selectors) => {
-  const inputError = fieldset.querySelector(`.${formInput.id}-error`);
-
+const isValid = (formElement, formInput, selectors) => {
+  const inputError = formElement.querySelector(`.${formInput.id}-error`);
   //кастомное сообщение
   if (formInput.validity.patternMismatch) {
     formInput.setCustomValidity(formInput.dataset.errorMessage);
@@ -66,20 +65,20 @@ const toggleButtonState = (inputList, buttonElement, selectors) => {
   }
 };
 
-// Функция, которая обрабатывает fieldset: находит все input ы и кнопку внутри себя
+// Функция, которая обрабатывает форму: находит все input ы и кнопку внутри себя
 // Добавляет для каждого input слушателя, при каком-либо изменении input
 // - проверяем валиден ли input
 // - и стоит ли после изменения данного input делать кнопку активной
-const setEventListeners = (fieldset, selectors) => {
+const setEventListeners = (formElement, selectors) => {
   // Найдём все поля формы и сделаем из них массив
-  const inputList = Array.from(fieldset.querySelectorAll(selectors.inputSelector));
+  const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
   // Найдём в текущей форме кнопку отправки
-  const buttonElement = fieldset.querySelector(selectors.submitButtonSelector);
+  const buttonElement = formElement.querySelector(selectors.submitButtonSelector);
   toggleButtonState(inputList, buttonElement, selectors);
 
   inputList.forEach((formInput) => {
     formInput.addEventListener('input', () => {
-      isValid(fieldset, formInput, selectors);
+      isValid(formElement, formInput, selectors);
 
       // Вызовем toggleButtonState и передадим ей массив полей и кнопку
       toggleButtonState(inputList, buttonElement, selectors);
@@ -87,20 +86,13 @@ const setEventListeners = (fieldset, selectors) => {
 });
 };
 
-// Функция, которая сама найдет все формы из HTML (DOM). У каждой формы
-// уберет поведение по умолчанию и пройдется по всем fieldset ам
+// Функция, которая сама найдет все формы из HTML (DOM)
 export const enableValidation = (selectors) => {
   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
-
-  formList.forEach((formInput) => {
-    formInput.addEventListener('submit', function (evt) {
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
-    
-    const fieldsetList = Array.from(formInput.querySelectorAll(selectors.fieldsetSelector));
-
-    fieldsetList.forEach((fieldset) => {
-      setEventListeners(fieldset, selectors);
-    });
+    setEventListeners(formElement, selectors);
   });
 };
