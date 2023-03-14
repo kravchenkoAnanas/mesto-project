@@ -1,3 +1,4 @@
+// проверка ответа от сервера 
 export function checkResponse(res) {
   if (res.ok) {
     return res.json();
@@ -5,6 +6,7 @@ export function checkResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
+// значок загрузки
 export function renderLoading(isLoading, button) {
   if (isLoading) {
     button.setAttribute("value", button.value + "...");

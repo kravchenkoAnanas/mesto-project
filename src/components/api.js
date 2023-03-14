@@ -1,5 +1,6 @@
 import { checkResponse } from "./utils.js";
 
+// нужна в качестве шаблона, чтобы в каждом запросе не писать одинаковые строки
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-18',
   headers: {
@@ -17,7 +18,7 @@ export const getUserInfo = () => {
 
 export const updateUserInfo = (name, about) => {
   return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
+    method: 'PATCH', // PATCH — для частичного обновления ресурса. Например, при обновлении профиля пользователя
     headers: config.headers,
     body: JSON.stringify({
       name: name,
@@ -35,7 +36,7 @@ export const getInitialCards = () => {
 
 export const postCard = (name, link) => {
   return fetch(`${config.baseUrl}/cards`, {
-    method: 'POST',
+    method: 'POST', // POST используют для отправки данных на сервер
     headers: config.headers,
     body: JSON.stringify({
       name: name,
@@ -54,7 +55,6 @@ export const deleteCard = (cardId) => {
 };
 
 export const updateAvatar = (link) => {
-  // setTimeout(function() { console.log("setTimeout") }, 10000);
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
@@ -67,7 +67,7 @@ export const updateAvatar = (link) => {
 
 export const putLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-    method: 'PUT',
+    method: 'PUT', // PUT предназначен для полного обновления указанного ресурса. Например, если в каталоге книг вы решили заменить одну книгу другой;
     headers: config.headers
   })
   .then(checkResponse)

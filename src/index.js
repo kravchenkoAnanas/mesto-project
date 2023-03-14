@@ -42,7 +42,7 @@ export const popupAvatarFormLinkInput = popupAvatar.querySelector("#link-input")
 export const popupAvatarSubmitButton = popupAvatar.querySelector(".popup__submit-button")
 
 export const elements = content.querySelector(".elements")
-export const cardTemplate = document.querySelector("#element").content;
+export const cardTemplate = document.querySelector("#element").content; //returns a <template> element's template contents
 
 export let userId;
 
@@ -78,7 +78,7 @@ popupAvatarCloseButton.addEventListener("click", function() {
 });
 popupAvatarForm.addEventListener("submit", submitPopupAvatar)
 
-enableValidation({
+enableValidation(selectors={
   formSelector: '.popup__content',
   fieldsetSelector: '.popup__input-items',
   inputSelector: '.popup__input-item',
@@ -87,23 +87,32 @@ enableValidation({
   errorClass: 'popup__input-item_error'
 });
 
+// 1) Запуск функций из api.js (user + cards) 
+// 2) Отрисовка полученной информации в html
 // work w server
-Promise.all([getUserInfo(), getInitialCards()])
-// тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+Promise.all([getUserInfo(), getInitialCards()]) // Метод Promise.all(iterable) возвращает промис, который выполнится тогда, когда будут выполнены все промисы, переданные в виде перечисляемого аргумента, или отклонено любое из переданных промисов.
+  // обработка ответов от сервера. в userInfo - ответ от getUserInfo, в cards - getInitialCards
   .then(([userInfo, cards]) => {
+    // мой user id
     userId = userInfo._id;
     
+    // заполняем профиль пользователя на сайте информацией, который пришла от сервера
     profileInfoTitle.textContent = userInfo.name;
     profileInfoSubTitle.textContent = userInfo.about;
     profileInfoAvatarImg.setAttribute("src", userInfo.avatar);
     profileInfoAvatarImg.setAttribute("alt", "Аватар");
 
+    // заполняем карты
+    // getInitialCards вернул массив карточек в порядке их добавления на сервер
+    // reverse - разворот элементов массива (чтобы на сайте новые карты были в самом начале)
     cards.reverse().forEach(function(card) {
       const cardId = card._id;
       const name = card.name;
       const link = card.link;
       const cntLikes = card.likes.length;
       const ownerId = card.owner._id;
+
+      // [false, false, true, false] -> some -> true
       const isLiked = card.likes.some(user => {
         return user._id === userId
       })
